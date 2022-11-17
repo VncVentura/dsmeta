@@ -9,7 +9,7 @@ function Header() {
                 <h1>DSMeta</h1>
                 <p>
                     Desenvolvido por
-                    <a href=" Vnc"> Vnc.ig</a>
+                    <a href=" Vnc"> Vnc</a>
                 </p>
             </div>
         </header>
