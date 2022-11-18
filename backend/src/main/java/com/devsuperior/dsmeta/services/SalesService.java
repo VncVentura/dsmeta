@@ -1,6 +1,8 @@
 package com.devsuperior.dsmeta.services;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,10 +18,13 @@ public class SalesService {
 	@Autowired
 	private SaleRepository repository;
 
-	public Page<Sales> findSales(String minDate, String maxDate,Pageable pageable) {
-		LocalDate min = LocalDate.parse(minDate);
-		LocalDate max = LocalDate.parse(maxDate);
-		
-		return repository.findSales(min,max,pageable);
+	public Page<Sales> findSales(String minDate, String maxDate, Pageable pageable) {
+
+		LocalDate today = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
+
+		LocalDate min = minDate.equals("") ? today.minusYears(365): LocalDate.parse(minDate);
+		LocalDate max = maxDate.equals("") ? today : LocalDate.parse(maxDate);
+
+		return repository.findSales(min, max, pageable);
 	}
 }
